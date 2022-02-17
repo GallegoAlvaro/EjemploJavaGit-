@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author alvaro
+ * @author alvaro y sergio
  */
 public class Campo {
     private int id;
