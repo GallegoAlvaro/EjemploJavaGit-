@@ -16,6 +16,7 @@ public class Equipamiento extends javax.swing.JFrame {
      */
     public Equipamiento() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

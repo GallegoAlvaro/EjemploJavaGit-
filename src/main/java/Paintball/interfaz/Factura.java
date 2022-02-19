@@ -16,6 +16,7 @@ public class Factura extends javax.swing.JFrame {
      */
     public Factura() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

@@ -16,6 +16,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -27,6 +28,11 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogreserva = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        botoncampo = new javax.swing.JButton();
+        botonequipo = new javax.swing.JButton();
+        botoniniciol = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         botonlogin = new javax.swing.JButton();
@@ -37,11 +43,75 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtcontraseña = new javax.swing.JPasswordField();
 
+        jDialogreserva.setMinimumSize(new java.awt.Dimension(400, 225));
+
+        jLabel1.setText("¿QUE QUIERES RESERVAR?");
+
+        botoncampo.setText("Reservar Campo");
+        botoncampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoncampoActionPerformed(evt);
+            }
+        });
+
+        botonequipo.setText("Reservar Equipamiento");
+        botonequipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonequipoActionPerformed(evt);
+            }
+        });
+
+        botoniniciol.setText("INICIO");
+        botoniniciol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoniniciolActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogreservaLayout = new javax.swing.GroupLayout(jDialogreserva.getContentPane());
+        jDialogreserva.getContentPane().setLayout(jDialogreservaLayout);
+        jDialogreservaLayout.setHorizontalGroup(
+            jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogreservaLayout.createSequentialGroup()
+                .addGroup(jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogreservaLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel1))
+                    .addGroup(jDialogreservaLayout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(botoniniciol)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jDialogreservaLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(botoncampo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(botonequipo)
+                .addGap(33, 33, 33))
+        );
+        jDialogreservaLayout.setVerticalGroup(
+            jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogreservaLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addGap(64, 64, 64)
+                .addGroup(jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botoncampo)
+                    .addComponent(botonequipo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(botoniniciol)
+                .addGap(49, 49, 49))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton3.setText("jButton3");
 
         botonlogin.setText("Iniciar sesion");
+        botonlogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonloginActionPerformed(evt);
+            }
+        });
 
         botonregistrarsel.setText("Registrarse");
         botonregistrarsel.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +218,27 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcontraseñaActionPerformed
 
+    private void botoncampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botoncampoActionPerformed
+
+    private void botonequipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonequipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonequipoActionPerformed
+
+    private void botoniniciolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoniniciolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botoniniciolActionPerformed
+
+    private void botonloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonloginActionPerformed
+
+        jDialogreserva.setVisible(true);
+       jDialogreserva.setLocationRelativeTo(this);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonloginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -184,9 +275,14 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botoncampo;
+    private javax.swing.JButton botonequipo;
+    private javax.swing.JButton botoniniciol;
     private javax.swing.JButton botonlogin;
     private javax.swing.JButton botonregistrarsel;
     private javax.swing.JButton jButton3;
+    private javax.swing.JDialog jDialogreserva;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
