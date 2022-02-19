@@ -61,11 +61,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="RESERVAR EQUIPAMIENTO"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonequipamientocActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botoninicioc2">
           <Properties>
             <Property name="text" type="java.lang.String" value="INICIO"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botoninicioc2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonsalirc2">
           <Properties>

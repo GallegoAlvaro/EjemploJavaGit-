@@ -32,7 +32,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         botoncampo = new javax.swing.JButton();
         botonequipo = new javax.swing.JButton();
-        botoniniciol = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         botonlogin = new javax.swing.JButton();
@@ -62,25 +61,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        botoniniciol.setText("INICIO");
-        botoniniciol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botoniniciolActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jDialogreservaLayout = new javax.swing.GroupLayout(jDialogreserva.getContentPane());
         jDialogreserva.getContentPane().setLayout(jDialogreservaLayout);
         jDialogreservaLayout.setHorizontalGroup(
             jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogreservaLayout.createSequentialGroup()
-                .addGroup(jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialogreservaLayout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel1))
-                    .addGroup(jDialogreservaLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(botoniniciol)))
+                .addGap(125, 125, 125)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jDialogreservaLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
@@ -98,9 +85,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jDialogreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botoncampo)
                     .addComponent(botonequipo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(botoniniciol)
-                .addGap(49, 49, 49))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -218,11 +203,13 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonregistrarselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonregistrarselActionPerformed
+
        
         this.setVisible(false);
-        //Registro log = new Logi
-        
-        
+        Registro reg = new Registro();
+        reg.setVisible(true);
+
+
     }//GEN-LAST:event_botonregistrarselActionPerformed
 
     private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
@@ -230,22 +217,27 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcontraseñaActionPerformed
 
     private void botoncampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncampoActionPerformed
+
+        this.setVisible(false);
+        Campo campo = new Campo();
+        campo.setVisible(true);
+        jDialogreserva.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_botoncampoActionPerformed
 
     private void botonequipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonequipoActionPerformed
+
+        this.setVisible(false);
+        Equipamiento equi = new Equipamiento();
+        equi.setVisible(true);
+        jDialogreserva.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_botonequipoActionPerformed
-
-    private void botoniniciolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoniniciolActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botoniniciolActionPerformed
 
     private void botonloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonloginActionPerformed
 
         jDialogreserva.setVisible(true);
-       jDialogreserva.setLocationRelativeTo(this);
-
+        jDialogreserva.setLocationRelativeTo(this);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_botonloginActionPerformed
@@ -294,7 +286,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botoncampo;
     private javax.swing.JButton botonequipo;
-    private javax.swing.JButton botoniniciol;
     private javax.swing.JButton botonlogin;
     private javax.swing.JButton botonregistrarsel;
     private javax.swing.JButton jButton3;

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author alvaro
  */
-public class Registro extends javax.swing.JFrame {
+public class Registro extends conexion {
 
     /**
      * Creates new form Registro
@@ -91,7 +92,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Fecha de nacimiento:");
 
-        salirr2.setText("Registrarse");
+        salirr2.setText("SALIR");
         salirr2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirr2ActionPerformed(evt);
@@ -185,8 +186,12 @@ public class Registro extends javax.swing.JFrame {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
                
                 
-                String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre)"
-                        + "values ('LOpez Lopez', 'EturT5', '35467263C', 'LopeLope@yahoo.com', 546787365,'Martin')";
+                Date fecha = jDateChooser1.getDate();
+                
+                String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
+                        + "values ('"+jTextField4.getText()+"', '"+jTextField3.getText()+"', '"+jTextField8.getText()
+                        +"', '"+jTextField7.getText()+"', "+jTextField6.getText()+",'"+jTextField2.getText()
+                        +"', '"+ new SimpleDateFormat("YYYY-MM-dd").format(fecha)+"')";
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
                 
                 sentencia.executeUpdate();
@@ -198,8 +203,13 @@ public class Registro extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
     }//GEN-LAST:event_botonregistrorActionPerformed
 
+    
+    
     private void salirr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirr2ActionPerformed
 
         System.exit(0);

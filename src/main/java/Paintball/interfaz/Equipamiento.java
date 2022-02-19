@@ -54,7 +54,7 @@ public class Equipamiento extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         botoninicioe1 = new javax.swing.JButton();
 
-        jDialog1.setMinimumSize(new java.awt.Dimension(180, 390));
+        jDialog1.setMinimumSize(new java.awt.Dimension(390, 180));
 
         jLabel5.setText("¿QUIERES RESERVAR UN CAMPO?");
 
@@ -84,18 +84,17 @@ public class Equipamiento extends javax.swing.JFrame {
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(botoncampor))
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDialog1Layout.createSequentialGroup()
-                                .addComponent(botoninicioe2)
-                                .addGap(47, 47, 47)
-                                .addComponent(botonsalirc2))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDialog1Layout.createSequentialGroup()
+                            .addGap(130, 130, 130)
+                            .addComponent(botoncampor))
+                        .addGroup(jDialog1Layout.createSequentialGroup()
+                            .addGap(109, 109, 109)
+                            .addComponent(botoninicioe2)
+                            .addGap(47, 47, 47)
+                            .addComponent(botonsalirc2))))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
         jDialog1Layout.setVerticalGroup(
@@ -337,10 +336,20 @@ public class Equipamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_txtprecioarmaActionPerformed
 
     private void botoncamporActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncamporActionPerformed
+
+        this.setVisible(false);
+        Campo campo = new Campo();
+        campo.setVisible(true);
+        jDialog1.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_botoncamporActionPerformed
 
     private void botoninicioe2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoninicioe2ActionPerformed
+
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
+        jDialog1.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_botoninicioe2ActionPerformed
 
@@ -351,43 +360,17 @@ public class Equipamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_botonsalirc2ActionPerformed
 
     private void botoninicioe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoninicioe1ActionPerformed
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_botoninicioe1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Equipamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Equipamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Equipamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Equipamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Equipamiento().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botoncampor;

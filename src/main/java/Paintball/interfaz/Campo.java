@@ -54,8 +54,18 @@ public class Campo extends javax.swing.JFrame {
         jLabel8.setText("¿QUIERES RESERVAR EQUIPAMIENTO?");
 
         botonequipamientoc.setText("RESERVAR EQUIPAMIENTO");
+        botonequipamientoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonequipamientocActionPerformed(evt);
+            }
+        });
 
         botoninicioc2.setText("INICIO");
+        botoninicioc2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoninicioc2ActionPerformed(evt);
+            }
+        });
 
         botonsalirc2.setText("SALIR");
 
@@ -236,9 +246,9 @@ public class Campo extends javax.swing.JFrame {
 
     private void botonreservacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonreservacActionPerformed
 
-            jDialogequipamiento.setVisible(true);
-       jDialogequipamiento.setLocationRelativeTo(this);
-
+        
+        jDialogequipamiento.setVisible(true);
+        jDialogequipamiento.setLocationRelativeTo(this);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_botonreservacActionPerformed
@@ -270,40 +280,25 @@ public class Campo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botoninicio1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Campo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Campo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Campo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Campo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void botoninicioc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoninicioc2ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Campo().setVisible(true);
-            }
-        });
-    }
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
+        jDialogequipamiento.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botoninicioc2ActionPerformed
+
+    private void botonequipamientocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonequipamientocActionPerformed
+
+        this.setVisible(false);
+        Equipamiento equi = new Equipamiento();
+        equi.setVisible(true);
+        jDialogequipamiento.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonequipamientocActionPerformed
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Combotipocampo;

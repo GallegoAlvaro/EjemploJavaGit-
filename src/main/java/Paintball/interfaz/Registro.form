@@ -194,7 +194,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="salirr2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registrarse"/>
+        <Property name="text" type="java.lang.String" value="SALIR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salirr2ActionPerformed"/>
