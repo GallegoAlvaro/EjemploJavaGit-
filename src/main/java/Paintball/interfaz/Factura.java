@@ -152,6 +152,8 @@ public class Factura extends javax.swing.JFrame {
     }//GEN-LAST:event_botonsacarfacturaActionPerformed
 
     private void botonsalirfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonsalirfActionPerformed
+
+        System.exit(0);
         // TODO add your handling code here:
     }//GEN-LAST:event_botonsalirfActionPerformed
 

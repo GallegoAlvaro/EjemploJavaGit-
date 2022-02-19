@@ -53,6 +53,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        salirr2 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -90,6 +91,13 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Fecha de nacimiento:");
 
+        salirr2.setText("Registrarse");
+        salirr2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirr2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,11 +127,14 @@ public class Registro extends javax.swing.JFrame {
                             .addComponent(txtcontraseñar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(botonregistror)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(botonregistror)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salirr2)
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +168,9 @@ public class Registro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(botonregistror)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonregistror)
+                    .addComponent(salirr2))
                 .addGap(42, 42, 42))
         );
 
@@ -187,6 +200,12 @@ public class Registro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonregistrorActionPerformed
 
+    private void salirr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirr2ActionPerformed
+
+        System.exit(0);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salirr2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,6 +222,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton salirr2;
     private javax.swing.JTextField txtapellidos;
     private javax.swing.JTextField txtclienter;
     private javax.swing.JTextField txtcontraseñar;

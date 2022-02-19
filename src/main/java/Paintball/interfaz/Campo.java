@@ -28,6 +28,11 @@ public class Campo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogequipamiento = new javax.swing.JDialog();
+        jLabel8 = new javax.swing.JLabel();
+        botonequipamientoc = new javax.swing.JButton();
+        botoninicioc2 = new javax.swing.JButton();
+        botonsalirc2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtcantidadjugadoresc = new javax.swing.JTextField();
@@ -42,6 +47,50 @@ public class Campo extends javax.swing.JFrame {
         txtpreciohorac = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtlimitejugadores = new javax.swing.JTextField();
+        botoninicio1 = new javax.swing.JButton();
+
+        jDialogequipamiento.setMinimumSize(new java.awt.Dimension(390, 180));
+
+        jLabel8.setText("¿QUIERES RESERVAR EQUIPAMIENTO?");
+
+        botonequipamientoc.setText("RESERVAR EQUIPAMIENTO");
+
+        botoninicioc2.setText("INICIO");
+
+        botonsalirc2.setText("SALIR");
+
+        javax.swing.GroupLayout jDialogequipamientoLayout = new javax.swing.GroupLayout(jDialogequipamiento.getContentPane());
+        jDialogequipamiento.getContentPane().setLayout(jDialogequipamientoLayout);
+        jDialogequipamientoLayout.setHorizontalGroup(
+            jDialogequipamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogequipamientoLayout.createSequentialGroup()
+                .addGroup(jDialogequipamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogequipamientoLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(botonequipamientoc))
+                    .addGroup(jDialogequipamientoLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(jDialogequipamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jDialogequipamientoLayout.createSequentialGroup()
+                                .addComponent(botoninicioc2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonsalirc2))
+                            .addComponent(jLabel8))))
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+        jDialogequipamientoLayout.setVerticalGroup(
+            jDialogequipamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogequipamientoLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonequipamientoc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(jDialogequipamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botoninicioc2)
+                    .addComponent(botonsalirc2))
+                .addGap(52, 52, 52))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,43 +146,55 @@ public class Campo extends javax.swing.JFrame {
             }
         });
 
+        botoninicio1.setText("INICIO");
+        botoninicio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoninicio1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonreservac)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonsalirc)
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtlimitejugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtcantidadjugadoresc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtcantidadjugadoresc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(47, 47, 47)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txttotalc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Combotipocampo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtpreciohorac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonreservac)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonsalirc)
+                                .addGap(52, 52, 52)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txttotalc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Combotipocampo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtpreciohorac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(txtlimitejugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(botoninicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,7 +222,9 @@ public class Campo extends javax.swing.JFrame {
                     .addComponent(botonsalirc)
                     .addComponent(jLabel7)
                     .addComponent(txtlimitejugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88))
+                .addGap(38, 38, 38)
+                .addComponent(botoninicio1)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -172,10 +235,17 @@ public class Campo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcantidadjugadorescActionPerformed
 
     private void botonreservacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonreservacActionPerformed
+
+            jDialogequipamiento.setVisible(true);
+       jDialogequipamiento.setLocationRelativeTo(this);
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_botonreservacActionPerformed
 
     private void botonsalircActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonsalircActionPerformed
+
+        System.exit(0);
         // TODO add your handling code here:
     }//GEN-LAST:event_botonsalircActionPerformed
 
@@ -190,6 +260,15 @@ public class Campo extends javax.swing.JFrame {
     private void txtlimitejugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtlimitejugadoresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtlimitejugadoresActionPerformed
+
+    private void botoninicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoninicio1ActionPerformed
+
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botoninicio1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,8 +307,13 @@ public class Campo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Combotipocampo;
+    private javax.swing.JButton botonequipamientoc;
+    private javax.swing.JButton botoninicio1;
+    private javax.swing.JButton botoninicioc2;
     private javax.swing.JButton botonreservac;
     private javax.swing.JButton botonsalirc;
+    private javax.swing.JButton botonsalirc2;
+    private javax.swing.JDialog jDialogequipamiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -237,6 +321,7 @@ public class Campo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtcantidadjugadoresc;
     private javax.swing.JTextField txtlimitejugadores;
     private javax.swing.JTextField txtpreciohorac;
