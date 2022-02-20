@@ -185,7 +185,7 @@ public class Registro extends conexion {
             try {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
                
-                
+           /*     
                 Date fecha = jDateChooser1.getDate();
                 
                 String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
@@ -195,7 +195,7 @@ public class Registro extends conexion {
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
                 
                 sentencia.executeUpdate();
-
+*/
                 // TODO add your handling code here:
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
