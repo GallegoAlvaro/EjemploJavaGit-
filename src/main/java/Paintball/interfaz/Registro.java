@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,8 +24,6 @@ import java.util.logging.Logger;
  */
 public class Registro extends conexion {
 
-    ArrayList nif;
-    ArrayList email;
     Boolean nifex;
     Boolean emex;
 
@@ -200,22 +199,18 @@ public class Registro extends conexion {
                 Statement sql = conexion.createStatement();
                 ResultSet result = sql.executeQuery("Select NIF, email  From clientes");
 
-                nif = new ArrayList();
-                email = new ArrayList();
                 nifex = false;
                 emex = false;
 
                 while (result.next()) {
 
-                    nif.add(result.getString("NIF"));
-                    email.add(result.getString("email"));
                     if (txtnifr.getText().equals(result.getString("NIF"))) {
 
                         nifex = true;
 
                     }
 
-                    if (txtnifr.getText().equals(result.getString("NIF"))) {
+                    if (txtemail.getText().equals(result.getString("email"))) {
 
                         emex = true;
 
@@ -231,7 +226,7 @@ public class Registro extends conexion {
 
                 String clienif = txtnifr.getText();
 
-                if (!nifex || !emex) {
+                if (!nifex && !emex) {
 
                     Date fecha = jDateChooser1.getDate();
 
@@ -242,23 +237,28 @@ public class Registro extends conexion {
 
                     // PreparedStatement sentencia = conexion.prepareStatement(consulta);
                     // sentencia.executeUpdate();
+                    this.setVisible(false);
+                    Login log = new Login();
+                    log.setVisible(true);
+
                 } else {
-                    if (!nifex & !emex) {
-                        
-                        System.out.println("El NIF y el email ya existenten");
-                        
-                    }else{
-                        
-                        if(!nifex){
-                            
-                            System.out.println("El NIF ya existente");
-                            
-                        }else if(!emex){
-                            
-                            System.out.println("El email ya existente");
-                            
+
+                    if (nifex & emex) {
+
+                        JOptionPane.showMessageDialog(rootPane, "El NIF y el email ya existenten");
+
+                    } else {
+
+                        if (nifex) {
+
+                            JOptionPane.showMessageDialog(rootPane, "El NIF ya existente");
+
+                        } else if (emex) {
+
+                            JOptionPane.showMessageDialog(rootPane, "El email ya existente");
+
                         }
-                        
+
                     }
                 }
 
@@ -268,9 +268,6 @@ public class Registro extends conexion {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.setVisible(false);
-        Login log = new Login();
-        log.setVisible(true);
     }//GEN-LAST:event_botonregistrorActionPerformed
 
 
