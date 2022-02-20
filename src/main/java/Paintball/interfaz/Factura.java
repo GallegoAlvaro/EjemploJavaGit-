@@ -5,6 +5,15 @@
  */
 package Paintball.interfaz;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro
@@ -142,6 +151,28 @@ public class Factura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonsacarfacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonsacarfacturaActionPerformed
+
+/*
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try {
+                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+                
+                String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
+                        + "values ('"+txtapellidos.getText()+"', '"+txtcontraseñar.getText()+"', '"+txtnifr.getText()
+                        +"', '"+txtemail.getText()+"', "+txttelefono.getText()+",'"+txtclienter.getText()
+                        +"', '"+ new SimpleDateFormat("YYYY-MM-dd").format(fecha)+"')";
+                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                
+                sentencia.executeUpdate();
+                // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+*/
         // TODO add your handling code here:
     }//GEN-LAST:event_botonsacarfacturaActionPerformed
 

@@ -5,6 +5,15 @@
  */
 package Paintball.interfaz;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro
@@ -230,7 +239,7 @@ public class Login extends javax.swing.JFrame {
         this.setVisible(false);
         Equipamiento equi = new Equipamiento();
         equi.setVisible(true);
-        jDialogreserva.setVisible(false);
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_botonequipoActionPerformed
 
@@ -239,6 +248,28 @@ public class Login extends javax.swing.JFrame {
         jDialogreserva.setVisible(true);
         jDialogreserva.setLocationRelativeTo(this);
 
+        
+        
+        
+          try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try {
+                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+                    
+                String consulta = "insert into login (email, contraseña)"
+                        + "values ('"+txtusuario.getText()+"', '"+txtcontraseña.getText()+"')";
+                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                
+                sentencia.executeUpdate();
+                // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_botonloginActionPerformed
 
