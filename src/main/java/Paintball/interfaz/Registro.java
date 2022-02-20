@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,11 @@ import java.util.logging.Logger;
  * @author alvaro
  */
 public class Registro extends conexion {
+
+    ArrayList nif;
+    ArrayList email;
+    Boolean nifex;
+    Boolean emex;
 
     /**
      * Creates new form Registro
@@ -185,22 +191,77 @@ public class Registro extends conexion {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonregistrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonregistrorActionPerformed
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
-                   
-                Date fecha = jDateChooser1.getDate();
-                
-                String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
-                        + "values ('"+txtapellidos.getText()+"', '"+txtcontraseñar.getText()+"', '"+txtnifr.getText()
-                        +"', '"+txtemail.getText()+"', "+txttelefono.getText()+",'"+txtclienter.getText()
-                        +"', '"+ new SimpleDateFormat("YYYY-MM-dd").format(fecha)+"')";
-                PreparedStatement sentencia = conexion.prepareStatement(consulta);
-                
-                sentencia.executeUpdate();
-                // TODO add your handling code here:
+
+                Statement sql = conexion.createStatement();
+                ResultSet result = sql.executeQuery("Select NIF, email  From clientes");
+
+                nif = new ArrayList();
+                email = new ArrayList();
+                nifex = false;
+                emex = false;
+
+                while (result.next()) {
+
+                    nif.add(result.getString("NIF"));
+                    email.add(result.getString("email"));
+                    if (txtnifr.getText().equals(result.getString("NIF"))) {
+
+                        nifex = true;
+
+                    }
+
+                    if (txtnifr.getText().equals(result.getString("NIF"))) {
+
+                        emex = true;
+
+                    }
+
+                    if (emex | nifex) {
+
+                        break;
+
+                    }
+
+                }
+
+                String clienif = txtnifr.getText();
+
+                if (!nifex || !emex) {
+
+                    Date fecha = jDateChooser1.getDate();
+
+                    String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
+                            + "values ('" + txtapellidos.getText() + "', '" + txtcontraseñar.getText() + "', '" + txtnifr.getText()
+                            + "', '" + txtemail.getText() + "', " + txttelefono.getText() + ",'" + txtclienter.getText()
+                            + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fecha) + "')";
+
+                    // PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                    // sentencia.executeUpdate();
+                } else {
+                    if (!nifex & !emex) {
+                        
+                        System.out.println("El NIF y el email ya existenten");
+                        
+                    }else{
+                        
+                        if(!nifex){
+                            
+                            System.out.println("El NIF ya existente");
+                            
+                        }else if(!emex){
+                            
+                            System.out.println("El email ya existente");
+                            
+                        }
+                        
+                    }
+                }
+
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -212,8 +273,7 @@ public class Registro extends conexion {
         log.setVisible(true);
     }//GEN-LAST:event_botonregistrorActionPerformed
 
-    
-    
+
     private void salirr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirr2ActionPerformed
 
         System.exit(0);
@@ -223,7 +283,6 @@ public class Registro extends conexion {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonregistror;
