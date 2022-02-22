@@ -250,7 +250,7 @@ public class Login extends javax.swing.JFrame {
 
         
         
-        
+      /*  
           try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
@@ -269,7 +269,7 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
       
-        
+        */
         // TODO add your handling code here:
     }//GEN-LAST:event_botonloginActionPerformed
 

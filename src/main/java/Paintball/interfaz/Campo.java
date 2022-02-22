@@ -5,6 +5,15 @@
  */
 package Paintball.interfaz;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro
@@ -48,6 +57,8 @@ public class Campo extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtlimitejugadores = new javax.swing.JTextField();
         botoninicio1 = new javax.swing.JButton();
+        inicio = new com.toedter.calendar.JDateChooser();
+        fin = new com.toedter.calendar.JDateChooser();
 
         jDialogequipamiento.setMinimumSize(new java.awt.Dimension(390, 180));
 
@@ -130,6 +141,8 @@ public class Campo extends javax.swing.JFrame {
             }
         });
 
+        Combotipocampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hola" }));
+
         jLabel4.setText("Tipo de campo:");
 
         jLabel5.setText("Precio hora: ");
@@ -174,15 +187,21 @@ public class Campo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtcantidadjugadoresc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(47, 47, 47)
+                                        .addComponent(txtcantidadjugadoresc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
@@ -205,21 +224,25 @@ public class Campo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addComponent(botoninicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(75, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(Combotipocampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel4)
+                        .addComponent(Combotipocampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(txtpreciohorac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel5)
+                        .addComponent(txtpreciohorac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -246,9 +269,34 @@ public class Campo extends javax.swing.JFrame {
 
     private void botonreservacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonreservacActionPerformed
 
-        
         jDialogequipamiento.setVisible(true);
         jDialogequipamiento.setLocationRelativeTo(this);
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try {
+                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+
+                Date fechainicio = inicio.getDate();
+                Date fechafin = fin.getDate();
+
+                float hora = Float.parseFloat(txtpreciohorac.getText());
+                float total = Float.parseFloat(txttotalc.getText());
+
+                String consulta = "insert into campo (fecha_inicio, fecha_fin, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal)"
+                        + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fechafin) + "', '" + Combotipocampo.getSelectedItem() + "', '"
+                        + txtcantidadjugadoresc.getText() + "', '" + txtlimitejugadores.getText() + "', " + hora
+                        + ", " + total + ")";
+                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+
+                sentencia.executeUpdate();
+                // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_botonreservacActionPerformed
@@ -298,7 +346,6 @@ public class Campo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonequipamientocActionPerformed
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Combotipocampo;
@@ -308,6 +355,8 @@ public class Campo extends javax.swing.JFrame {
     private javax.swing.JButton botonreservac;
     private javax.swing.JButton botonsalirc;
     private javax.swing.JButton botonsalirc2;
+    private com.toedter.calendar.JDateChooser fin;
+    private com.toedter.calendar.JDateChooser inicio;
     private javax.swing.JDialog jDialogequipamiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
