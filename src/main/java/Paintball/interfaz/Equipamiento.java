@@ -21,20 +21,18 @@ public class Equipamiento extends javax.swing.JFrame {
     /**
      * Creates new form Equipamiento
      */
-    int totalarmas;
-    int totalmunicion;
-    int totaltrejes;
-    int total;
+    float totalarmas;
+    float totalmunicion;
+    float totaltrojos;
+    float totalazules;
+    float total;
+    float totaltrajes;
+    String total2;
 
     public Equipamiento() {
         initComponents();
         setLocationRelativeTo(this);
-/*
-        totalarmas = Integer.parseInt(txtarmas.getText()) * Integer.parseInt(txtprecioarma.getText());
-        totalmunicion = Integer.parseInt(txtmunicion.getText()) * Integer.parseInt(txtpreciomunicion.getText());
-        totaltrejes = Integer.parseInt((txttrajesazules.getText()) + Integer.parseInt(txttrajesrojos.getText()) * Integer.parseInt(txtpreciotrajes.getText()));
-        total = totalarmas + totalmunicion + totaltrejes;
-        */
+
     }
 
     /**
@@ -168,12 +166,6 @@ public class Equipamiento extends javax.swing.JFrame {
         txtmunicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmunicionActionPerformed(evt);
-            }
-        });
-
-        txtarmas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtarmasActionPerformed(evt);
             }
         });
 
@@ -317,21 +309,39 @@ public class Equipamiento extends javax.swing.JFrame {
         jDialog1.setVisible(true);
         jDialog1.setLocationRelativeTo(this);
 
-        String total2 = String.valueOf(total);
+        totalarmas = Float.parseFloat(txtarmas.getText()) * Float.parseFloat(txtprecioarma.getText());
+        totalmunicion = Integer.parseInt(txtmunicion.getText()) * Float.parseFloat(txtpreciomunicion.getText());
+        totaltrojos =  Integer.parseInt(txttrajesrojos.getText()) * Float.parseFloat(txtpreciotrajes.getText());
+        totalazules = Integer.parseInt(txttrajesazules.getText())* Float.parseFloat(txtpreciotrajes.getText());
+        totaltrajes = totaltrojos + totalazules;
+        
+        total = totalarmas + totalmunicion + totaltrajes;
+
+        total2 = String.valueOf(total);
 
         txttotale.setText(total2);
-/*
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
-                String consulta = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, traje_azul, traje_rojo, precio_trajes)"
-                        + "values ('" + txttotale.getText() + "', '" + txtarmas.getText() + "', '" + txtprecioarma.getText()
-                        + "', '" + txtmunicion.getText() + "', " + txtpreciomunicion.getText() + ",'" + txttrajesazules.getText()
-                        + "', '" + txttrajesrojos.getText() + "', " + txtpreciotrajes.getText() + "')";
-
-                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                
+                
+                
+                
+                String sql = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, "
+                        + "traje_azul, traje_rojo, precio_trajes) values (?,?,?,?,?,?,?,?)";
+                
+                PreparedStatement sentencia = conexion.prepareStatement(sql);
+                sentencia.setFloat(1, total);
+                sentencia.setInt(2, Integer.parseInt(txtarmas.getText()));
+                sentencia.setFloat(3, totalarmas);
+                sentencia.setInt(4, Integer.parseInt(txtmunicion.getText()));
+                sentencia.setFloat(5, totalmunicion);
+                sentencia.setInt(6, Integer.parseInt(txttrajesazules.getText()));
+                sentencia.setInt(7, Integer.parseInt(txttrajesrojos.getText()));
+                sentencia.setFloat(8, totaltrajes);
+                
 
                 sentencia.executeUpdate();
                 // TODO add your handling code here:
@@ -341,7 +351,7 @@ public class Equipamiento extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
+
         // TODO add your handling code here:
     }//GEN-LAST:event_botonreservaeActionPerformed
 
@@ -357,10 +367,6 @@ public class Equipamiento extends javax.swing.JFrame {
     private void txtmunicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmunicionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmunicionActionPerformed
-
-    private void txtarmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtarmasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtarmasActionPerformed
 
     private void txttrajesazulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttrajesazulesActionPerformed
         // TODO add your handling code here:
