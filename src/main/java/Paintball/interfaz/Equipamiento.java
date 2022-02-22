@@ -5,6 +5,13 @@
  */
 package Paintball.interfaz;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro
@@ -14,9 +21,20 @@ public class Equipamiento extends javax.swing.JFrame {
     /**
      * Creates new form Equipamiento
      */
+    int totalarmas;
+    int totalmunicion;
+    int totaltrejes;
+    int total;
+
     public Equipamiento() {
         initComponents();
         setLocationRelativeTo(this);
+/*
+        totalarmas = Integer.parseInt(txtarmas.getText()) * Integer.parseInt(txtprecioarma.getText());
+        totalmunicion = Integer.parseInt(txtmunicion.getText()) * Integer.parseInt(txtpreciomunicion.getText());
+        totaltrejes = Integer.parseInt((txttrajesazules.getText()) + Integer.parseInt(txttrajesrojos.getText()) * Integer.parseInt(txtpreciotrajes.getText()));
+        total = totalarmas + totalmunicion + totaltrejes;
+        */
     }
 
     /**
@@ -299,6 +317,31 @@ public class Equipamiento extends javax.swing.JFrame {
         jDialog1.setVisible(true);
         jDialog1.setLocationRelativeTo(this);
 
+        String total2 = String.valueOf(total);
+
+        txttotale.setText(total2);
+/*
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try {
+                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+
+                String consulta = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, traje_azul, traje_rojo, precio_trajes)"
+                        + "values ('" + txttotale.getText() + "', '" + txtarmas.getText() + "', '" + txtprecioarma.getText()
+                        + "', '" + txtmunicion.getText() + "', " + txtpreciomunicion.getText() + ",'" + txttrajesazules.getText()
+                        + "', '" + txttrajesrojos.getText() + "', " + txtpreciotrajes.getText() + "')";
+
+                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+
+                sentencia.executeUpdate();
+                // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+*/
         // TODO add your handling code here:
     }//GEN-LAST:event_botonreservaeActionPerformed
 
@@ -370,7 +413,6 @@ public class Equipamiento extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botoncampor;
