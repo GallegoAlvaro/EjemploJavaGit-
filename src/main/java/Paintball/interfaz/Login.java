@@ -250,7 +250,7 @@ public class Login extends javax.swing.JFrame {
 
         
         
-      /*  
+      /* 
           try {
             Class.forName("com.mysql.jdbc.Driver");
             try {

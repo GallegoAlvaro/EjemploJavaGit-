@@ -203,6 +203,11 @@ public class Registro extends conexion {
     private void botonregistrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonregistrorActionPerformed
 
         try {
+            txttelefono.getText();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Solo puedes poner numeros en el telefono");
+        }
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
@@ -212,10 +217,10 @@ public class Registro extends conexion {
 
                 nifex = false;
                 emex = false;
-                boolean vacio = true;
+                String telefono = "";
 
-                if (!(txtnifr.getText() != null && txtemail.getText() != null && txtapellidos.getText()!= null 
-                        && txtclienter.getText()!= null && txtcontraseñar.getText()!= null && txttelefono.getText()!=null)) {
+                if (!(txtnifr.getText().equals("") || txtemail.getText().equals("") || txtapellidos.getText().equals("")
+                        || txtclienter.getText().equals("") || txtcontraseñar.getText().equals("") || txttelefono.getText().equals(""))) {
 
                     while (result.next()) {
 
@@ -276,10 +281,10 @@ public class Registro extends conexion {
 
                         }
                     }
-                }else{
+                } else {
+
                     JOptionPane.showMessageDialog(rootPane, "Tienes que rellenar todos los campos");
                 }
-                    
 
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);

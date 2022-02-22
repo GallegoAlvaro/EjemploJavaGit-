@@ -287,8 +287,10 @@ public class Campo extends javax.swing.JFrame {
                         + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fechafin) + "', '" + Combotipocampo.getSelectedItem() + "', '"
                         + txtcantidadjugadoresc.getText() + "', '" + txtlimitejugadores.getText() + "', " + hora
                         + ", " + total + ")";
+                
+               
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
-
+               
                 sentencia.executeUpdate();
                 // TODO add your handling code here:
             } catch (SQLException ex) {
