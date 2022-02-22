@@ -145,7 +145,7 @@ public class Equipamiento extends javax.swing.JFrame {
 
         jLabel6.setText("Precio de la Municion");
 
-        jLabel7.setText("Precio de los TREAJES");
+        jLabel7.setText("Precio de los TRAJES:");
 
         botonsalire.setText("Precio total :");
 
