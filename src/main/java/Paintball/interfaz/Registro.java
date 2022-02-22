@@ -212,66 +212,74 @@ public class Registro extends conexion {
 
                 nifex = false;
                 emex = false;
+                boolean vacio = true;
 
-                while (result.next()) {
+                if (!(txtnifr.getText() != null && txtemail.getText() != null && txtapellidos.getText()!= null 
+                        && txtclienter.getText()!= null && txtcontraseñar.getText()!= null && txttelefono.getText()!=null)) {
 
-                    if (txtnifr.getText().equals(result.getString("NIF"))) {
+                    while (result.next()) {
 
-                        nifex = true;
+                        if (txtnifr.getText().equals(result.getString("NIF"))) {
 
-                    }
+                            nifex = true;
 
-                    if (txtemail.getText().equals(result.getString("email"))) {
+                        }
 
-                        emex = true;
+                        if (txtemail.getText().equals(result.getString("email"))) {
 
-                    }
+                            emex = true;
 
-                    if (emex | nifex) {
+                        }
 
-                        break;
+                        if (emex | nifex) {
 
-                    }
-
-                }
-
-                String clienif = txtnifr.getText();
-
-                if (!nifex && !emex) {
-
-                    Date fecha = jDateChooser1.getDate();
-
-                    String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
-                            + "values ('" + txtapellidos.getText() + "', '" + txtcontraseñar.getText() + "', '" + txtnifr.getText()
-                            + "', '" + txtemail.getText() + "', " + txttelefono.getText() + ",'" + txtclienter.getText()
-                            + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fecha) + "')";
-
-                    // PreparedStatement sentencia = conexion.prepareStatement(consulta);
-                    // sentencia.executeUpdate();
-                    this.setVisible(false);
-                    Login log = new Login();
-                    log.setVisible(true);
-
-                } else {
-
-                    if (nifex & emex) {
-
-                        JOptionPane.showMessageDialog(rootPane, "El NIF y el email ya existenten");
-
-                    } else {
-
-                        if (nifex) {
-
-                            JOptionPane.showMessageDialog(rootPane, "El NIF ya existente");
-
-                        } else if (emex) {
-
-                            JOptionPane.showMessageDialog(rootPane, "El email ya existente");
+                            break;
 
                         }
 
                     }
+
+                    String clienif = txtnifr.getText();
+
+                    if (!nifex && !emex) {
+
+                        Date fecha = jDateChooser1.getDate();
+
+                        String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
+                                + "values ('" + txtapellidos.getText() + "', '" + txtcontraseñar.getText() + "', '" + txtnifr.getText()
+                                + "', '" + txtemail.getText() + "', " + txttelefono.getText() + ",'" + txtclienter.getText()
+                                + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fecha) + "')";
+
+                        // PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                        // sentencia.executeUpdate();
+                        this.setVisible(false);
+                        Login log = new Login();
+                        log.setVisible(true);
+
+                    } else {
+
+                        if (nifex & emex) {
+
+                            JOptionPane.showMessageDialog(rootPane, "El NIF y el email ya existenten");
+
+                        } else {
+
+                            if (nifex) {
+
+                                JOptionPane.showMessageDialog(rootPane, "El NIF ya existente");
+
+                            } else if (emex) {
+
+                                JOptionPane.showMessageDialog(rootPane, "El email ya existente");
+
+                            }
+
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Tienes que rellenar todos los campos");
                 }
+                    
 
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
