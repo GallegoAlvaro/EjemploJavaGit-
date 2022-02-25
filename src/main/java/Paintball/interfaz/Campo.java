@@ -141,8 +141,6 @@ public class Campo extends javax.swing.JFrame {
             }
         });
 
-        Combotipocampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hola" }));
-
         jLabel4.setText("Tipo de campo:");
 
         jLabel5.setText("Precio hora: ");

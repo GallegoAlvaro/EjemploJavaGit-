@@ -446,7 +446,7 @@ public class Equipamiento extends javax.swing.JFrame {
                 sentencia.setFloat(8, totaltrajes);
 
                 sentencia.executeUpdate();
-                // TODO add your handling code here:
+                
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -454,7 +454,7 @@ public class Equipamiento extends javax.swing.JFrame {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_botonreservaeActionPerformed
 
 
