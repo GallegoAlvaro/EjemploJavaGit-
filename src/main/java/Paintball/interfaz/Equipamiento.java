@@ -5,19 +5,12 @@
  */
 package Paintball.interfaz;
 
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -34,119 +27,11 @@ public class Equipamiento extends javax.swing.JFrame {
     float totalazules;
     float total;
     float totaltrajes;
-    String total2 = "0.0";
+    String total2;
 
     public Equipamiento() {
         initComponents();
-
-        setLocationRelativeTo(this);        
-
-        txtarmas.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-
-                totalarmas = Integer.parseInt(txtarmas.getText()) * Float.parseFloat(txtprecioarma.getText());
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-                if (txtarmas.getText().equals("") || txtarmas.getText().isBlank()) {
-
-                    JOptionPane.showMessageDialog(rootPane, "Debes de introducir la cantidad de armas deseadas");
-
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-        });
-        
-        txtmunicion.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                
-                totalmunicion = Integer.parseInt(txtmunicion.getText()) * Float.parseFloat(txtpreciomunicion.getText());
-            
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                
-                 if (txtarmas.getText().equals("") || txtarmas.getText().isBlank()) {
-
-                    JOptionPane.showMessageDialog(rootPane, "Debes de introducir la cantidad de munición deseadas");
-
-                }
-                
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        
-        
-        txttrajesrojos.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                
-                 totaltrojos = Integer.parseInt(txttrajesrojos.getText()) * Float.parseFloat(txtpreciotrajes.getText());
-               
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                
-                if (txtarmas.getText().equals("") || txtarmas.getText().isBlank()) {
-
-                    JOptionPane.showMessageDialog(rootPane, "Debes de introducir la cantidad de trajes rojos deseados");
-
-                }
-                
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                
-            }
-        });
-        
-        txttrajesazules.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                
-                totalazules = Integer.parseInt(txttrajesazules.getText()) * Float.parseFloat(txtpreciotrajes.getText());
-                
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                
-                if (txtarmas.getText().equals("") || txtarmas.getText().isBlank()) {
-
-                    JOptionPane.showMessageDialog(rootPane, "Debes de introducir la cantidad de trajes azules deseados");
-
-                }
-                
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                
-            }
-        });
-        
-        
-        
-
-        total2 = String.valueOf(total);
-
-        txttotale.setText(total2);
+        setLocationRelativeTo(this);
 
     }
 
@@ -164,7 +49,9 @@ public class Equipamiento extends javax.swing.JFrame {
         botoncampor = new javax.swing.JButton();
         botoninicioe2 = new javax.swing.JButton();
         botonsalirc2 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        txttrajesrojos = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -173,17 +60,17 @@ public class Equipamiento extends javax.swing.JFrame {
         botonsalire = new javax.swing.JLabel();
         botonreservae = new javax.swing.JButton();
         botonsalir = new javax.swing.JButton();
+        txttotale = new javax.swing.JTextField();
+        txtmunicion = new javax.swing.JTextField();
+        txtarmas = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        txttrajesazules = new javax.swing.JTextField();
+        txtpreciotrajes = new javax.swing.JTextField();
+        txtpreciomunicion = new javax.swing.JTextField();
+        txtprecioarma = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         botoninicioe1 = new javax.swing.JButton();
-        txtarmas = new javax.swing.JFormattedTextField();
-        txttrajesrojos = new javax.swing.JFormattedTextField();
-        txttrajesazules = new javax.swing.JFormattedTextField();
-        txtmunicion = new javax.swing.JFormattedTextField();
-        txtprecioarma = new javax.swing.JFormattedTextField();
-        txtpreciomunicion = new javax.swing.JFormattedTextField();
-        txtpreciotrajes = new javax.swing.JFormattedTextField();
-        txttotale = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
 
         jDialog1.setMinimumSize(new java.awt.Dimension(390, 180));
 
@@ -210,23 +97,37 @@ public class Equipamiento extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("FACTURA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDialog1Layout.createSequentialGroup()
-                            .addGap(130, 130, 130)
-                            .addComponent(botoncampor))
-                        .addGroup(jDialog1Layout.createSequentialGroup()
-                            .addGap(109, 109, 109)
-                            .addComponent(botoninicioe2)
-                            .addGap(47, 47, 47)
-                            .addComponent(botonsalirc2))))
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(botoncampor))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(botoninicioe2)
+                        .addGap(47, 47, 47)
+                        .addComponent(botonsalirc2)))
                 .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
+            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                    .addGap(155, 155, 155)
+                    .addComponent(jButton2)
+                    .addContainerGap(155, Short.MAX_VALUE)))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,11 +141,22 @@ public class Equipamiento extends javax.swing.JFrame {
                     .addComponent(botoninicioe2)
                     .addComponent(botonsalirc2))
                 .addGap(38, 38, 38))
+            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                    .addGap(79, 79, 79)
+                    .addComponent(jButton2)
+                    .addContainerGap(79, Short.MAX_VALUE)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Cantidad de ARMAS:");
+
+        txttrajesrojos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttrajesrojosActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Cantidad de TRAJES ROJOS:");
 
@@ -252,11 +164,11 @@ public class Equipamiento extends javax.swing.JFrame {
 
         jLabel4.setText("Precio del ARMA");
 
-        jLabel6.setText("Precio de la MUNICION");
+        jLabel6.setText("Precio de la Municion");
 
-        jLabel7.setText("Precio de los TRAJES:");
+        jLabel7.setText("Precio de los TREAJES");
 
-        botonsalire.setText("Precio TOTAL :");
+        botonsalire.setText("Precio total :");
 
         botonreservae.setText("RESERVA");
         botonreservae.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +184,37 @@ public class Equipamiento extends javax.swing.JFrame {
             }
         });
 
+        txtmunicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmunicionActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Cantidad de TRAJES AZULES:");
+
+        txttrajesazules.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttrajesazulesActionPerformed(evt);
+            }
+        });
+
+        txtpreciotrajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpreciotrajesActionPerformed(evt);
+            }
+        });
+
+        txtpreciomunicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpreciomunicionActionPerformed(evt);
+            }
+        });
+
+        txtprecioarma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtprecioarmaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("RESERVA DE EQUIPAMIENTO");
 
@@ -283,79 +225,73 @@ public class Equipamiento extends javax.swing.JFrame {
             }
         });
 
-        txtarmas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        txttrajesrojos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        txttrajesazules.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        txtmunicion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        txtprecioarma.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        txtpreciomunicion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        txtpreciotrajes.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        txttotale.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jButton1.setText("FACTURA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonreservae)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonsalir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonsalire, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txttotale, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(16, 16, 16)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(jLabel1))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txttrajesrojos, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                            .addComponent(txtarmas)))
-                                    .addComponent(botoninicioe1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtmunicion, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                            .addComponent(txttrajesazules))))
+                                .addComponent(botonreservae)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonsalir)
+                                .addGap(61, 61, 61)
+                                .addComponent(botonsalire, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txttotale, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel4)))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(35, 35, 35)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtprecioarma, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtpreciotrajes, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(txtpreciomunicion)))
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtarmas, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txttrajesrojos, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtpreciotrajes, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txttrajesazules, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtmunicion, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtprecioarma, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtpreciomunicion, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(163, 163, 163)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(40, Short.MAX_VALUE))))
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(botoninicioe1)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,45 +301,35 @@ public class Equipamiento extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtarmas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtprecioarma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel3)
                     .addComponent(txtmunicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtarmas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txttrajesrojos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
                     .addComponent(txtpreciomunicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txttrajesazules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtpreciotrajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txttrajesrojos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonsalir)
-                            .addComponent(botonreservae))
-                        .addGap(18, 46, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonsalire)
-                            .addComponent(txttotale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(botoninicioe1)
-                        .addGap(14, 14, 14))))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txttrajesazules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtprecioarma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtpreciotrajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonsalir)
+                    .addComponent(botonreservae)
+                    .addComponent(botonsalire)
+                    .addComponent(txttotale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(botoninicioe1)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
@@ -414,28 +340,30 @@ public class Equipamiento extends javax.swing.JFrame {
         jDialog1.setVisible(true);
         jDialog1.setLocationRelativeTo(this);
 
+        totalarmas = Float.parseFloat(txtarmas.getText()) * Float.parseFloat(txtprecioarma.getText());
+        totalmunicion = Integer.parseInt(txtmunicion.getText()) * Float.parseFloat(txtpreciomunicion.getText());
+        totaltrojos =  Integer.parseInt(txttrajesrojos.getText()) * Float.parseFloat(txtpreciotrajes.getText());
+        totalazules = Integer.parseInt(txttrajesazules.getText())* Float.parseFloat(txtpreciotrajes.getText());
+        totaltrajes = totaltrojos + totalazules;
+        
+        total = totalarmas + totalmunicion + totaltrajes;
+
+        total2 = String.valueOf(total);
+
+        txttotale.setText(total2);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+
                 
-                totalarmas = Integer.parseInt(txtarmas.getText()) * Float.parseFloat(txtprecioarma.getText());
-
-                totalmunicion = Integer.parseInt(txtmunicion.getText()) * Float.parseFloat(txtpreciomunicion.getText());
-
-                totaltrojos = Integer.parseInt(txttrajesrojos.getText()) * Float.parseFloat(txtpreciotrajes.getText());
-
-                totalazules = Integer.parseInt(txttrajesazules.getText()) * Float.parseFloat(txtpreciotrajes.getText());
-
-                totaltrajes = totaltrojos + totalazules;
-
-                total = totalarmas + totalmunicion + totaltrajes;
-
+                
+                
+                
                 String sql = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, "
                         + "traje_azul, traje_rojo, precio_trajes) values (?,?,?,?,?,?,?,?)";
-
+                
                 PreparedStatement sentencia = conexion.prepareStatement(sql);
-
                 sentencia.setFloat(1, total);
                 sentencia.setInt(2, Integer.parseInt(txtarmas.getText()));
                 sentencia.setFloat(3, totalarmas);
@@ -444,6 +372,7 @@ public class Equipamiento extends javax.swing.JFrame {
                 sentencia.setInt(6, Integer.parseInt(txttrajesazules.getText()));
                 sentencia.setInt(7, Integer.parseInt(txttrajesrojos.getText()));
                 sentencia.setFloat(8, totaltrajes);
+                
 
                 sentencia.executeUpdate();
                 // TODO add your handling code here:
@@ -457,11 +386,34 @@ public class Equipamiento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonreservaeActionPerformed
 
-
     private void botonsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonsalirActionPerformed
 
         System.exit(0);
     }//GEN-LAST:event_botonsalirActionPerformed
+
+    private void txttrajesrojosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttrajesrojosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttrajesrojosActionPerformed
+
+    private void txtmunicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmunicionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmunicionActionPerformed
+
+    private void txttrajesazulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttrajesazulesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttrajesazulesActionPerformed
+
+    private void txtpreciotrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpreciotrajesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpreciotrajesActionPerformed
+
+    private void txtpreciomunicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpreciomunicionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpreciomunicionActionPerformed
+
+    private void txtprecioarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecioarmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtprecioarmaActionPerformed
 
     private void botoncamporActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncamporActionPerformed
 
@@ -495,6 +447,18 @@ public class Equipamiento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botoninicioe1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        this.setVisible(false);
+        Factura fac = new Factura();
+        fac.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -507,6 +471,8 @@ public class Equipamiento extends javax.swing.JFrame {
     private javax.swing.JButton botonsalir;
     private javax.swing.JButton botonsalirc2;
     private javax.swing.JLabel botonsalire;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -517,13 +483,13 @@ public class Equipamiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JFormattedTextField txtarmas;
-    private javax.swing.JFormattedTextField txtmunicion;
-    private javax.swing.JFormattedTextField txtprecioarma;
-    private javax.swing.JFormattedTextField txtpreciomunicion;
-    private javax.swing.JFormattedTextField txtpreciotrajes;
-    private javax.swing.JFormattedTextField txttotale;
-    private javax.swing.JFormattedTextField txttrajesazules;
-    private javax.swing.JFormattedTextField txttrajesrojos;
+    private javax.swing.JTextField txtarmas;
+    private javax.swing.JTextField txtmunicion;
+    private javax.swing.JTextField txtprecioarma;
+    private javax.swing.JTextField txtpreciomunicion;
+    private javax.swing.JTextField txtpreciotrajes;
+    private javax.swing.JTextField txttotale;
+    private javax.swing.JTextField txttrajesazules;
+    private javax.swing.JTextField txttrajesrojos;
     // End of variables declaration//GEN-END:variables
 }

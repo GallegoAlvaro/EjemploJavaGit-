@@ -8,11 +8,14 @@ package Paintball.interfaz;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,8 +29,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(this);
-        
-        
     }
 
     /**
@@ -152,7 +153,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel4.setText("Contraseña :");
 
-        txtcontraseña.setText("jPasswordField1");
         txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcontraseñaActionPerformed(evt);
@@ -171,7 +171,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -194,9 +194,9 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +215,6 @@ public class Login extends javax.swing.JFrame {
 
     private void botonregistrarselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonregistrarselActionPerformed
 
-       
         this.setVisible(false);
         Registro reg = new Registro();
         reg.setVisible(true);
@@ -241,37 +240,66 @@ public class Login extends javax.swing.JFrame {
         this.setVisible(false);
         Equipamiento equi = new Equipamiento();
         equi.setVisible(true);
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_botonequipoActionPerformed
 
     private void botonloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonloginActionPerformed
 
-        jDialogreserva.setVisible(true);
-        jDialogreserva.setLocationRelativeTo(this);
+        boolean email = true;
+        boolean contraseña = true;
 
-        
-        
-      /* 
-          try {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            try {
-                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
-                    
-                String consulta = "insert into login (email, contraseña)"
-                        + "values ('"+txtusuario.getText()+"', '"+txtcontraseña.getText()+"')";
-                PreparedStatement sentencia = conexion.prepareStatement(consulta);
-                
-                sentencia.executeUpdate();
-                // TODO add your handling code here:
-            } catch (SQLException ex) {
-                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+
+            Statement sql = conexion.createStatement();
+            ResultSet result = sql.executeQuery("Select id, contraseña, email  From clientes ");
+
+            while (result.next()) {
+
+                if (txtcontraseña.getText().equals(result.getString("contraseña"))) {
+
+                    contraseña = true;
+
+                } else {
+                    contraseña = false;
+                }
+
+                if (txtusuario.getText().equals(result.getString("email"))) {
+
+                    email = true;
+
+                } else {
+                    email = false;
+                }
+
+                if (email | email) {
+
+                    break;
+
+                }
+
             }
+            if (email && contraseña) {
+
+                jDialogreserva.setVisible(true);
+                jDialogreserva.setLocationRelativeTo(this);
+                String consulta = "insert into login (email, contraseña)"
+                        + "values ('" + txtusuario.getText() + "', '" + txtcontraseña.getText() + "')";
+                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+
+                sentencia.executeUpdate();
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "El email o la contraseña no existenten");
+            }
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error");
+        } catch (SQLException ex) {
+            System.out.println("Error en MYSQL");
         }
-      
-        */
         // TODO add your handling code here:
     }//GEN-LAST:event_botonloginActionPerformed
 
