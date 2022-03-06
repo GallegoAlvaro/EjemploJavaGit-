@@ -26,6 +26,7 @@ public class Campo extends javax.swing.JFrame {
     public Campo() {
         initComponents();
         setLocationRelativeTo(this);
+        
     }
 
     /**

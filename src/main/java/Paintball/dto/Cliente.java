@@ -24,6 +24,11 @@ public class Cliente {
     private int Telefono;
     private String nombre;
 
+    public Cliente() {
+    }
+    
+    
+
     public Cliente(int id, String apellidos, String contrasena, String NIF, String email, Date fecha, int Telefono, String nombre) {
         this.id = id;
         this.apellidos = apellidos;

@@ -5,6 +5,7 @@
  */
 package Paintball.interfaz;
 
+import Paintball.dto.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -307,6 +308,20 @@ public class Login extends javax.swing.JFrame {
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
 
                 sentencia.executeUpdate();
+                
+                ResultSet infocli = sql.executeQuery("select id, apellidos, contraseña, nif, email, fecha_nacimiento, telefono, nombre from clientes where email='" + txtusuario.getText() + "'");
+
+
+            Cliente cli = new Cliente();
+
+            cli.setId(infocli.getInt("id") );
+            cli.setApellidos(infocli.getString("apellidos"));
+            cli.setContrasena(infocli.getString("contraseña"));
+            cli.setNIF(infocli.getString("nif"));
+            cli.setEmail(infocli.getString("email"));
+            cli.setFecha(infocli.getDate("fecha_nacimiento"));
+            cli.setTelefono(infocli.getInt("telefono"));
+            cli.setNombre(infocli.getString("nombre"));
 
             } else {
                 JOptionPane.showMessageDialog(rootPane, "El email o la contraseña no existenten");
