@@ -6,6 +6,7 @@
 package Paintball.interfaz;
 
 import Paintball.dto.Cliente;
+import Paintball.dto.gestionclientes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,9 +30,9 @@ public class Administrador extends javax.swing.JFrame {
      */
     public Administrador() {
         initComponents();
-        Cliente cli = new Cliente();
-        System.out.println(cli.getId()+ cli.getApellidos() + cli.getContrasena()
-        + cli.getEmail() + cli.getNIF() + cli.getFecha() + cli.getNombre() + cli.getTelefono());
+       
+        
+        
     }
 
     /**

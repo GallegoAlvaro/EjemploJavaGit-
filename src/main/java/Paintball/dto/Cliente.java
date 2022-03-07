@@ -15,6 +15,8 @@ import java.sql.Date;
  * @author alvaro
  */
 public class Cliente {
+
+    
     private int id;
     private String apellidos;
     private String contrasena;
@@ -23,6 +25,13 @@ public class Cliente {
     private Date fecha;
     private int Telefono;
     private String nombre;
+
+    public Cliente(int id, String apellidos, String NIF, String nombre) {
+        this.id = id;
+        this.apellidos = apellidos;
+        this.NIF = NIF;
+        this.nombre = nombre;
+    }
 
     public Cliente() {
     }

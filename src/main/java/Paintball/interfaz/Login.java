@@ -7,6 +7,7 @@ package Paintball.interfaz;
 
 import Paintball.cifrar.encriptar;
 import Paintball.dto.Cliente;
+import Paintball.dto.gestionclientes;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +52,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         botoncampo = new javax.swing.JButton();
         botonequipo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnadmin = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         botonlogin = new javax.swing.JButton();
         botonregistrarsel = new javax.swing.JButton();
@@ -80,10 +82,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Crear campo y equipamiento");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnadmin.setText("Crear campo y equipamiento");
+        btnadmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnadminActionPerformed(evt);
             }
         });
 
@@ -104,7 +106,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jDialogreservaLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jButton1)))
+                        .addComponent(btnadmin)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialogreservaLayout.setVerticalGroup(
@@ -117,7 +119,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(botoncampo)
                     .addComponent(botonequipo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnadmin)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
@@ -204,8 +206,6 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvaro\\Documents\\NetBeansProjects\\EjemploJavaGit-\\src\\main\\resources\\imagenes\\img.jpg")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,68 +312,46 @@ public class Login extends javax.swing.JFrame {
 
                 jDialogreserva.setVisible(true);
                 jDialogreserva.setLocationRelativeTo(this);
+                String encriptado = enp.encriptar(txtcontraseña.getText(), enp.getClaveEncriptacion());
                 String consulta = "insert into login (email, contraseña)"
-                        + "values ('" + txtusuario.getText() + "', '" + txtcontraseña.getText() + "')";
+                        + "values ('" + txtusuario.getText() + "', '" + encriptado + "')";
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
 
                 sentencia.executeUpdate();
                 
-                /*String correo = String.valueOf(txtusuario.getText());
+                String correo = String.valueOf(txtusuario.getText());
                 
-                String lanza = "Select *  From clientes Where email='" + correo + "'";
-                int id =0 ;
-                String ape="" ;
-                String cont="" ;
-                String nif ="";
-                String ema ="";
-                Date fech = null;
-                int tel =0 ;
-                String nom ="";
-                
-                PreparedStatement info = conexion.prepareStatement(lanza);
-                info.setInt(1, id);
-                info.setString(2, ape);
-                info.setString(3, cont);
-                info.setString(4, nif);
-                info.setString(5, ema);
-                info.setDate(6, (java.sql.Date) fech);
-                info.setInt(7, tel);
-                info.setString(8, nom);
-                
+                Statement sqlcli = conexion.createStatement();
+            ResultSet infocli = sqlcli.executeQuery("select id, apellidos, nif, nombre, email from clientes");
 
-                sentencia.executeUpdate();
-                
-                System.out.println("Anttes");
-                
-                
-                ResultSet infocli = sql.executeQuery("Select *  From clientes Where email='" + correo + "'");
-                System.out.println("despues");
-
-            Cliente cli = new Cliente();
             
-                System.out.println(id + ape + cont + nif + ema + fech + tel + nom);
-                
-            cli.setId(id);
-            cli.setApellidos(ape);
-            cli.setContrasena(cont);
-            cli.setNIF(nif);
-            cli.setEmail(ema);
-            cli.setFecha(fech);
-            cli.setTelefono(tel);
-            cli.setNombre(nom);*/
             
-            /*
-            Cliente cli = new Cliente();
 
-            cli.setId(infocli.getInt("id") );
-            cli.setApellidos(infocli.getString("apellidos"));
-            cli.setContrasena(infocli.getString("contraseña"));
-            cli.setNIF(infocli.getString("nif"));
-            cli.setEmail(infocli.getString("email"));
-            cli.setFecha(infocli.getDate("fecha_nacimiento"));
-            cli.setTelefono(infocli.getInt("telefono"));
-            cli.setNombre(infocli.getString("nombre"));
-            */
+            while (infocli.next()) {
+
+                if(String.valueOf(infocli.getString("email")).equals(correo)){
+                    
+                    Cliente cli = new Cliente(Integer.parseInt(infocli.getString("id")), String.valueOf(infocli.getString("apellidos")), String.valueOf(infocli.getString("nif")), String.valueOf(infocli.getString("nombre")));
+                    gestionclientes.aniadirClienete(Integer.parseInt(infocli.getString("id")), String.valueOf(infocli.getString("apellidos")), String.valueOf(infocli.getString("nif")), String.valueOf(infocli.getString("nombre")));
+                    
+                    if(correo.equals("root")){
+                        
+                        btnadmin.setVisible(true);
+                        
+                    }else if(!correo.equals("root")){
+                        
+                        btnadmin.setVisible(false);
+                        
+                    }
+                    
+                }
+
+            }
+                
+                
+                
+                
+            
 
             } else {
                 JOptionPane.showMessageDialog(rootPane, "El email o la contraseña no existenten");
@@ -406,14 +384,15 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_salirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadminActionPerformed
 
-        this.setVisible(false);
+        
         Administrador admin = new Administrador();
         admin.setVisible(true);
+        this.setVisible(false);
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnadminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -455,7 +434,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton botonequipo;
     private javax.swing.JButton botonlogin;
     private javax.swing.JButton botonregistrarsel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnadmin;
     private javax.swing.JDialog jDialogreserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -468,3 +447,4 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
+

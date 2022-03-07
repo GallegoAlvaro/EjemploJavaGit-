@@ -5,6 +5,7 @@
  */
 package Paintball.interfaz;
 
+import Paintball.dto.gestionclientes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,6 +26,7 @@ public class Campo extends javax.swing.JFrame {
     
     ArrayList precio;
     ArrayList tipo;
+    ArrayList limite;
     Date fechafin;
     Date fechainicio;
 
@@ -40,13 +42,15 @@ public class Campo extends javax.swing.JFrame {
             Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
             Statement sql = conexion.createStatement();
-            ResultSet result = sql.executeQuery("select tipo, preciohora from infocampo;");
+            ResultSet result = sql.executeQuery("select tipo, preciohora, limitejugadores from infocampo;");
 
             precio = new ArrayList();
             tipo = new ArrayList();
+            limite = new ArrayList();
 
             while (result.next()) {
-
+                
+                limite.add(String.valueOf(result.getInt("limitejugadores")));
                 precio.add(String.valueOf(result.getFloat("preciohora")));
                 Combotipocampo.addItem(result.getString("tipo"));
                 tipo.add(result.getString("tipo"));
@@ -335,11 +339,12 @@ public class Campo extends javax.swing.JFrame {
 
                 float hora = Float.parseFloat(txtpreciohorac.getText());
                 float total = Float.parseFloat(txttotalc.getText());
+                int idcli= gestionclientes.getIdCliente();
 
-                String consulta = "insert into campo (fecha_inicio, fecha_fin, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal)"
+                String consulta = "insert into campo (fecha_inicio, fecha_fin, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal, clienteid)"
                         + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fechafin) + "', '" + Combotipocampo.getSelectedItem() + "', '"
                         + txtcantidadjugadoresc.getText() + "', '" + txtlimitejugadores.getText() + "', " + hora
-                        + ", " + total + ")";
+                        + ", " + total + idcli +")";
 
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
 
@@ -412,6 +417,8 @@ public class Campo extends javax.swing.JFrame {
         int posicion = Combotipocampo.getSelectedIndex();
         
         txtpreciohorac.setText(String.valueOf(precio.get(posicion)));
+        System.out.println(tipo);
+        txtlimitejugadores.setText(String.valueOf(limite.get(posicion)));
         
         float preci = Float.parseFloat((String) precio.get(posicion));
         
