@@ -5,6 +5,10 @@
  */
 package Paintball.interfaz;
 
+import Paintball.cifrar.encriptar;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -249,14 +256,19 @@ public class Registro extends conexion {
                     if (!nifex && !emex) {
 
                         Date fecha = jDateChooser1.getDate();
+                        encriptar enp = new encriptar();
+            
+                        String encriptado = enp.encriptar(txtcontraseñar.getText(), enp.getClaveEncriptacion());
+
+            
 
                         String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
-                                + "values ('" + txtapellidos.getText() + "', '" + txtcontraseñar.getText() + "', '" + txtnifr.getText()
+                                + "values ('" + txtapellidos.getText() + "', '" + encriptado + "', '" + txtnifr.getText()
                                 + "', '" + txtemail.getText() + "', " + txttelefono.getText() + ",'" + txtclienter.getText()
                                 + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fecha) + "')";
 
-                        // PreparedStatement sentencia = conexion.prepareStatement(consulta);
-                        // sentencia.executeUpdate();
+                        PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                        sentencia.executeUpdate();
                         this.setVisible(false);
                         Login log = new Login();
                         log.setVisible(true);
@@ -287,6 +299,18 @@ public class Registro extends conexion {
                 }
 
             } catch (SQLException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvalidKeyException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalBlockSizeException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BadPaddingException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchPaddingException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {

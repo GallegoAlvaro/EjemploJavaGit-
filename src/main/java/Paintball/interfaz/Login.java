@@ -5,7 +5,11 @@
  */
 package Paintball.interfaz;
 
+import Paintball.cifrar.encriptar;
 import Paintball.dto.Cliente;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +20,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,9 +31,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+     
     public Login() {
         initComponents();
         setLocationRelativeTo(this);
@@ -273,10 +278,14 @@ public class Login extends javax.swing.JFrame {
 
             Statement sql = conexion.createStatement();
             ResultSet result = sql.executeQuery("Select id, contraseña, email  From clientes ");
+            
+            encriptar enp = new encriptar();
 
             while (result.next()) {
+                
+                String desencriptado = enp.desencriptar(String.valueOf(result.getString("contraseña")), enp.getClaveEncriptacion());
 
-                if (txtcontraseña.getText().equals(result.getString("contraseña"))) {
+                if (txtcontraseña.getText().equals(desencriptado)) {
 
                     contraseña = true;
 
@@ -309,9 +318,51 @@ public class Login extends javax.swing.JFrame {
 
                 sentencia.executeUpdate();
                 
-                ResultSet infocli = sql.executeQuery("select id, apellidos, contraseña, nif, email, fecha_nacimiento, telefono, nombre from clientes where email='" + txtusuario.getText() + "'");
+                /*String correo = String.valueOf(txtusuario.getText());
+                
+                String lanza = "Select *  From clientes Where email='" + correo + "'";
+                int id =0 ;
+                String ape="" ;
+                String cont="" ;
+                String nif ="";
+                String ema ="";
+                Date fech = null;
+                int tel =0 ;
+                String nom ="";
+                
+                PreparedStatement info = conexion.prepareStatement(lanza);
+                info.setInt(1, id);
+                info.setString(2, ape);
+                info.setString(3, cont);
+                info.setString(4, nif);
+                info.setString(5, ema);
+                info.setDate(6, (java.sql.Date) fech);
+                info.setInt(7, tel);
+                info.setString(8, nom);
+                
 
+                sentencia.executeUpdate();
+                
+                System.out.println("Anttes");
+                
+                
+                ResultSet infocli = sql.executeQuery("Select *  From clientes Where email='" + correo + "'");
+                System.out.println("despues");
 
+            Cliente cli = new Cliente();
+            
+                System.out.println(id + ape + cont + nif + ema + fech + tel + nom);
+                
+            cli.setId(id);
+            cli.setApellidos(ape);
+            cli.setContrasena(cont);
+            cli.setNIF(nif);
+            cli.setEmail(ema);
+            cli.setFecha(fech);
+            cli.setTelefono(tel);
+            cli.setNombre(nom);*/
+            
+            /*
             Cliente cli = new Cliente();
 
             cli.setId(infocli.getInt("id") );
@@ -322,6 +373,7 @@ public class Login extends javax.swing.JFrame {
             cli.setFecha(infocli.getDate("fecha_nacimiento"));
             cli.setTelefono(infocli.getInt("telefono"));
             cli.setNombre(infocli.getString("nombre"));
+            */
 
             } else {
                 JOptionPane.showMessageDialog(rootPane, "El email o la contraseña no existenten");
@@ -330,8 +382,21 @@ public class Login extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             System.out.println("Error");
         } catch (SQLException ex) {
+            System.out.println(ex);
             System.out.println("Error en MYSQL");
-        }
+        } catch (UnsupportedEncodingException ex) {
+             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (NoSuchAlgorithmException ex) {
+             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InvalidKeyException ex) {
+             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (NoSuchPaddingException ex) {
+             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalBlockSizeException ex) {
+             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (BadPaddingException ex) {
+             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         }
         // TODO add your handling code here:
     }//GEN-LAST:event_botonloginActionPerformed
 

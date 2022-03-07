@@ -8,7 +8,10 @@ package Paintball.interfaz;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +35,35 @@ public class Equipamiento extends javax.swing.JFrame {
     public Equipamiento() {
         initComponents();
         setLocationRelativeTo(this);
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/accesos", "iesleonardo", "Wbqj38~0");
+
+            Statement sql = conexion.createStatement();
+            ResultSet result = sql.executeQuery("select id, tipo, precio, premun from infoequipo");
+
+        
+
+            while (result.next()) {
+
+                if(result.getString("tipo").equals("arma")){
+                    
+                    txtprecioarma.setText(String.valueOf(result.getFloat("precio")));
+                    txtpreciomunicion.setText(String.valueOf(result.getFloat("premun")));
+                    
+                }else if (result.getString("tipo").equals("armadura")){
+                    
+                    txtpreciotrajes.setText(String.valueOf(result.getFloat("precio")));
+                    
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Error");
+        } catch (SQLException ex) {
+            System.out.println("Error en MYSQL");
+        }
 
     }
 
