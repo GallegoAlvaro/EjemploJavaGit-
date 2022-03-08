@@ -5,6 +5,7 @@
  */
 package Paintball.interfaz;
 
+import Paintball.dto.gestionclientes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class Equipamiento extends javax.swing.JFrame {
             Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/accesos", "iesleonardo", "Wbqj38~0");
 
             Statement sql = conexion.createStatement();
-            ResultSet result = sql.executeQuery("select id, tipo, precio, premun from infoequipo");
+            ResultSet result = sql.executeQuery("select tipo, precio, premun from infoequipo;");
 
         
 
@@ -51,10 +52,12 @@ public class Equipamiento extends javax.swing.JFrame {
                     
                     txtprecioarma.setText(String.valueOf(result.getFloat("precio")));
                     txtpreciomunicion.setText(String.valueOf(result.getFloat("premun")));
+                    System.out.println("arma");
                     
                 }else if (result.getString("tipo").equals("armadura")){
                     
                     txtpreciotrajes.setText(String.valueOf(result.getFloat("precio")));
+                    System.out.println("b");
                     
                 }
             }
@@ -390,10 +393,10 @@ public class Equipamiento extends javax.swing.JFrame {
 
                 
                 
-                
+                int idcli = gestionclientes.getIdCliente();
                 
                 String sql = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, "
-                        + "traje_azul, traje_rojo, precio_trajes) values (?,?,?,?,?,?,?,?)";
+                        + "traje_azul, traje_rojo, precio_trajes, clienteid) values (?,?,?,?,?,?,?,?,?)";
                 
                 PreparedStatement sentencia = conexion.prepareStatement(sql);
                 sentencia.setFloat(1, total);
@@ -404,6 +407,7 @@ public class Equipamiento extends javax.swing.JFrame {
                 sentencia.setInt(6, Integer.parseInt(txttrajesazules.getText()));
                 sentencia.setInt(7, Integer.parseInt(txttrajesrojos.getText()));
                 sentencia.setFloat(8, totaltrajes);
+                sentencia.setInt(9, idcli);
                 
 
                 sentencia.executeUpdate();

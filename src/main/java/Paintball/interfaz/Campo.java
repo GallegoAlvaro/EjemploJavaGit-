@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +24,12 @@ import java.util.logging.Logger;
  * @author alvaro
  */
 public class Campo extends javax.swing.JFrame {
-    
+
     ArrayList precio;
     ArrayList tipo;
     ArrayList limite;
-    Date fechafin;
     Date fechainicio;
+    float preci;
 
     /**
      * Creates new form Campo
@@ -36,7 +37,7 @@ public class Campo extends javax.swing.JFrame {
     public Campo() {
         initComponents();
         setLocationRelativeTo(this);
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
@@ -49,7 +50,7 @@ public class Campo extends javax.swing.JFrame {
             limite = new ArrayList();
 
             while (result.next()) {
-                
+
                 limite.add(String.valueOf(result.getInt("limitejugadores")));
                 precio.add(String.valueOf(result.getFloat("preciohora")));
                 Combotipocampo.addItem(result.getString("tipo"));
@@ -62,9 +63,7 @@ public class Campo extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("Error en MYSQL");
         }
-        
-        
-        
+
     }
 
     /**
@@ -98,7 +97,7 @@ public class Campo extends javax.swing.JFrame {
         txtlimitejugadores = new javax.swing.JTextField();
         botoninicio1 = new javax.swing.JButton();
         inicio = new com.toedter.calendar.JDateChooser();
-        fin = new com.toedter.calendar.JDateChooser();
+        txtdias = new javax.swing.JFormattedTextField();
 
         jDialogequipamiento.setMinimumSize(new java.awt.Dimension(390, 180));
 
@@ -169,7 +168,7 @@ public class Campo extends javax.swing.JFrame {
 
         jLabel1.setText("Fecha de inicio de reserva:");
 
-        jLabel2.setText("Fecha de Fin de reserva :");
+        jLabel2.setText("Dias a reservar:");
 
         txtcantidadjugadoresc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,6 +234,8 @@ public class Campo extends javax.swing.JFrame {
             }
         });
 
+        txtdias.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,9 +256,9 @@ public class Campo extends javax.swing.JFrame {
                                         .addGap(12, 12, 12)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(inicio, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                    .addComponent(txtdias))))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,12 +295,11 @@ public class Campo extends javax.swing.JFrame {
                         .addComponent(Combotipocampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel5)
-                        .addComponent(txtpreciohorac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(txtpreciohorac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -334,22 +334,21 @@ public class Campo extends javax.swing.JFrame {
             try {
                 Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
-                fechainicio= inicio.getDate();
-                fechafin = fin.getDate();
+                fechainicio = inicio.getDate();
 
                 float hora = Float.parseFloat(txtpreciohorac.getText());
                 float total = Float.parseFloat(txttotalc.getText());
-                int idcli= gestionclientes.getIdCliente();
+                int idcli = gestionclientes.getIdCliente();
 
-                String consulta = "insert into campo (fecha_inicio, fecha_fin, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal, clienteid)"
-                        + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', '" + new SimpleDateFormat("YYYY-MM-dd").format(fechafin) + "', '" + Combotipocampo.getSelectedItem() + "', '"
-                        + txtcantidadjugadoresc.getText() + "', '" + txtlimitejugadores.getText() + "', " + hora
-                        + ", " + total + idcli +")";
+                String consulta = "insert into campo (fecha_inicio, cantidad_dias, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal, clienteid)"
+                        + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', " + Integer.parseInt(txtdias.getText()) + ", '" + String.valueOf( Combotipocampo.getSelectedItem()) + "', "
+                        + Integer.parseInt(txtcantidadjugadoresc.getText()) + ", " + Integer.parseInt( txtlimitejugadores.getText()) + ", " + hora
+                        + ", " + total + ", " + idcli + ")";
 
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
 
                 sentencia.executeUpdate();
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -357,7 +356,7 @@ public class Campo extends javax.swing.JFrame {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
+
     }//GEN-LAST:event_botonreservacActionPerformed
 
     private void botonsalircActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonsalircActionPerformed
@@ -383,7 +382,6 @@ public class Campo extends javax.swing.JFrame {
         this.setVisible(false);
         Login log = new Login();
         log.setVisible(true);
-        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_botoninicio1ActionPerformed
@@ -415,19 +413,29 @@ public class Campo extends javax.swing.JFrame {
 
     private void itemlistenar(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_itemlistenar
         int posicion = Combotipocampo.getSelectedIndex();
-        
+
         txtpreciohorac.setText(String.valueOf(precio.get(posicion)));
-        System.out.println(tipo);
+
         txtlimitejugadores.setText(String.valueOf(limite.get(posicion)));
-        
-        float preci = Float.parseFloat((String) precio.get(posicion));
-        
-        
-        //int dias =(int) (fechafin.getTime() - fechainicio.getTime());
-       // float preciototal = dias * preci;
-        
-        //txttotalc.setText(String.valueOf(preciototal));
-                
+
+        preci = Float.parseFloat((String) precio.get(posicion));
+        try {
+            if (!inicio.equals("") && !txtdias.equals("")) {
+
+                int dias = Integer.parseInt(txtdias.getText());
+                System.out.println(dias);
+
+                float preciototal = dias * preci;
+
+                txttotalc.setText(String.valueOf(preciototal));
+            }
+        } catch (NumberFormatException ex) {
+
+            System.out.println(ex);
+
+        }
+
+
     }//GEN-LAST:event_itemlistenar
 
 
@@ -439,7 +447,6 @@ public class Campo extends javax.swing.JFrame {
     private javax.swing.JButton botonreservac;
     private javax.swing.JButton botonsalirc;
     private javax.swing.JButton botonsalirc2;
-    private com.toedter.calendar.JDateChooser fin;
     private com.toedter.calendar.JDateChooser inicio;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialogequipamiento;
@@ -452,6 +459,7 @@ public class Campo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtcantidadjugadoresc;
+    private javax.swing.JFormattedTextField txtdias;
     private javax.swing.JTextField txtlimitejugadores;
     private javax.swing.JTextField txtpreciohorac;
     private javax.swing.JTextField txttotalc;
