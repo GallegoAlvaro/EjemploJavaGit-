@@ -8,7 +8,10 @@ package Paintball.interfaz;
 import Paintball.cifrar.encriptar;
 import Paintball.dto.Cliente;
 import Paintball.dto.gestionclientes;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -25,6 +28,9 @@ import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,7 +39,6 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-     
     public Login() {
         initComponents();
         setLocationRelativeTo(this);
@@ -63,6 +68,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtcontraseña = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        ayuda = new javax.swing.JButton();
 
         jDialogreserva.setMinimumSize(new java.awt.Dimension(400, 225));
 
@@ -207,11 +213,20 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        ayuda.setText("AYUDA");
+        ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ayudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(81, 81, 81))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,11 +235,17 @@ public class Login extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ayuda)
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
+                .addComponent(ayuda)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,11 +299,11 @@ public class Login extends javax.swing.JFrame {
 
             Statement sql = conexion.createStatement();
             ResultSet result = sql.executeQuery("Select id, contraseña, email  From clientes ");
-            
+
             encriptar enp = new encriptar();
 
             while (result.next()) {
-                
+
                 String desencriptado = enp.desencriptar(String.valueOf(result.getString("contraseña")), enp.getClaveEncriptacion());
 
                 if (txtcontraseña.getText().equals(desencriptado)) {
@@ -318,40 +339,32 @@ public class Login extends javax.swing.JFrame {
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
 
                 sentencia.executeUpdate();
-                
+
                 String correo = String.valueOf(txtusuario.getText());
-                
+
                 Statement sqlcli = conexion.createStatement();
-            ResultSet infocli = sqlcli.executeQuery("select id, apellidos, nif, nombre, email from clientes");
+                ResultSet infocli = sqlcli.executeQuery("select id, apellidos, nif, nombre, email from clientes");
 
-            
-            
+                while (infocli.next()) {
 
-            while (infocli.next()) {
+                    if (String.valueOf(infocli.getString("email")).equals(correo)) {
 
-                if(String.valueOf(infocli.getString("email")).equals(correo)){
-                    
-                    Cliente cli = new Cliente(Integer.parseInt(infocli.getString("id")), String.valueOf(infocli.getString("apellidos")), String.valueOf(infocli.getString("nif")), String.valueOf(infocli.getString("nombre")));
-                    gestionclientes.aniadirClienete(Integer.parseInt(infocli.getString("id")), String.valueOf(infocli.getString("apellidos")), String.valueOf(infocli.getString("nif")), String.valueOf(infocli.getString("nombre")));
-                    
-                    if(correo.equals("root")){
-                        
-                        btnadmin.setVisible(true);
-                        
-                    }else if(!correo.equals("root")){
-                        
-                        btnadmin.setVisible(false);
-                        
+                        Cliente cli = new Cliente(Integer.parseInt(infocli.getString("id")), String.valueOf(infocli.getString("apellidos")), String.valueOf(infocli.getString("nif")), String.valueOf(infocli.getString("nombre")));
+                        gestionclientes.aniadirClienete(Integer.parseInt(infocli.getString("id")), String.valueOf(infocli.getString("apellidos")), String.valueOf(infocli.getString("nif")), String.valueOf(infocli.getString("nombre")));
+
+                        if (correo.equals("root")) {
+
+                            btnadmin.setVisible(true);
+
+                        } else if (!correo.equals("root")) {
+
+                            btnadmin.setVisible(false);
+
+                        }
+
                     }
-                    
-                }
 
-            }
-                
-                
-                
-                
-            
+                }
 
             } else {
                 JOptionPane.showMessageDialog(rootPane, "El email o la contraseña no existenten");
@@ -363,18 +376,18 @@ public class Login extends javax.swing.JFrame {
             System.out.println(ex);
             System.out.println("Error en MYSQL");
         } catch (UnsupportedEncodingException ex) {
-             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (NoSuchAlgorithmException ex) {
-             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InvalidKeyException ex) {
-             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (NoSuchPaddingException ex) {
-             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IllegalBlockSizeException ex) {
-             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (BadPaddingException ex) {
-             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_botonloginActionPerformed
 
@@ -386,13 +399,34 @@ public class Login extends javax.swing.JFrame {
 
     private void btnadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadminActionPerformed
 
-        
         Administrador admin = new Administrador();
         admin.setVisible(true);
         this.setVisible(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnadminActionPerformed
+
+    private void ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaActionPerformed
+        File fichero = new File("./help/help_set.hs");
+        URL hsURL;
+        HelpSet helpset;
+        try {
+            hsURL = fichero.toURI().toURL();
+            try {
+                // Crea el HelpSet y el HelpBroker
+                helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+                HelpBroker hb = helpset.createHelpBroker();
+                // Pone ayuda al botón y a F1 en la ventana.
+                hb.enableHelpOnButton(ayuda, "aplicacion", helpset);
+                hb.enableHelpKey(this.getContentPane(), "aplicacion", helpset);
+            } catch (HelpSetException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ayudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,6 +464,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ayuda;
     private javax.swing.JButton botoncampo;
     private javax.swing.JButton botonequipo;
     private javax.swing.JButton botonlogin;
@@ -447,4 +482,3 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
-

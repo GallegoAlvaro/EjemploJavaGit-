@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d65930f7-e014-428c-a4f6-02474d3ef930">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     factura.`id` AS factura_id,
+     factura.`campoid` AS factura_campoid,
+     factura.`clienteid` AS factura_clienteid,
+     factura.`equipaminetoid` AS factura_equipaminetoid,
+     factura.`NIF` AS factura_NIF,
+     factura.`nombrecliente` AS factura_nombrecliente,
+     factura.`precio_equipamiento` AS factura_precio_equipamiento,
+     factura.`precio_campo` AS factura_precio_campo,
+     factura.`preciofinal` AS factura_preciofinal
+FROM
+     `factura` factura]]>
+	</queryString>
+	<field name="factura_id" class="java.lang.Integer"/>
+	<field name="factura_campoid" class="java.lang.Integer"/>
+	<field name="factura_clienteid" class="java.lang.Integer"/>
+	<field name="factura_equipaminetoid" class="java.lang.Integer"/>
+	<field name="factura_NIF" class="java.lang.String"/>
+	<field name="factura_nombrecliente" class="java.lang.String"/>
+	<field name="factura_precio_equipamiento" class="java.lang.Float"/>
+	<field name="factura_precio_campo" class="java.lang.Float"/>
+	<field name="factura_preciofinal" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="164" y="15" width="247" height="20" uuid="46374469-cdc6-420b-9bdb-91f0ae7fca83"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Facturacion de Mundo Painball]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="47" y="15" width="100" height="20" uuid="e31e7855-b3bb-447f-8579-3c2ad8435435"/>
+				<text><![CDATA[Nombre del cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="15" width="100" height="20" uuid="ed77f8c3-c090-43e5-8f05-c7f26f097d8d"/>
+				<text><![CDATA[Numero de factura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="15" width="100" height="20" uuid="9c2f71d2-b80d-4a15-b8bd-6d7c98454d91"/>
+				<textFieldExpression><![CDATA[$F{factura_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="15" width="100" height="20" uuid="ccef57e6-1b69-4159-8511-84a6f57e0edb"/>
+				<textFieldExpression><![CDATA[$F{factura_nombrecliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="13" y="36" width="524" height="25" backcolor="#66FFFF" uuid="d6e76c4b-9f56-4257-ac64-e5267f0317e3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="41" width="100" height="20" uuid="e96aad98-7d76-4c3a-ab13-0d9e87b94ef3"/>
+				<text><![CDATA[NIF de Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="41" width="129" height="20" uuid="c912a027-4713-4f47-989a-44d7eaf806cf"/>
+				<text><![CDATA[Precio del Equipamiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="41" width="129" height="20" uuid="82af01ba-43ec-4760-a3de-bea59cab8599"/>
+				<text><![CDATA[Precio del Campo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="41" width="88" height="20" uuid="94f7c4c6-43c5-4981-ae23-897dc6e0fcdf"/>
+				<text><![CDATA[Precio Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="146" y="36" width="1" height="25" uuid="95eb00e3-03bc-44a9-b141-385ed428cab8"/>
+			</line>
+			<line>
+				<reportElement x="303" y="36" width="1" height="25" uuid="521b9240-4863-4167-a898-4b28c34de410"/>
+			</line>
+			<line>
+				<reportElement x="443" y="36" width="1" height="25" uuid="00a71286-9bd1-4ec0-8616-a2f3654af232"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="164" y="0" width="129" height="20" uuid="833f1832-14cc-49b9-9ab5-8f4d859af1cd"/>
+				<textFieldExpression><![CDATA[$F{factura_precio_equipamiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="0" width="129" height="20" uuid="c840381f-c32d-4066-bc8a-994cc197223e"/>
+				<textFieldExpression><![CDATA[$F{factura_precio_campo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="88" height="20" uuid="7ad193fd-2100-4daf-87d4-3b36897c2956"/>
+				<textFieldExpression><![CDATA[$F{factura_preciofinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="0" width="100" height="20" uuid="c1c535d1-16dc-4c6f-ba97-751ab7a37e6d"/>
+				<textFieldExpression><![CDATA[$F{factura_NIF}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement x="449" y="22" width="99" height="20" uuid="9fc17b1d-9352-4195-9b94-9f49f1c00203"/>
+			</rectangle>
+			<textField>
+				<reportElement x="435" y="22" width="80" height="20" uuid="8280c312-ef05-4e15-bff6-ff99a304f6bf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="22" width="40" height="20" uuid="59360187-739d-4c71-bd36-e24bf3085af1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="13" y="11" width="100" height="20" uuid="9010f726-cdc4-4b95-bc1e-6a6382521492"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

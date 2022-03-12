@@ -6,7 +6,10 @@
 package Paintball.interfaz;
 
 import Paintball.cifrar.encriptar;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -23,6 +26,9 @@ import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,6 +76,7 @@ public class Registro extends conexion {
         salirr2 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        ayuda = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -121,6 +128,13 @@ public class Registro extends conexion {
             }
         });
 
+        ayuda.setText("AYUDA");
+        ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ayudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,7 +151,9 @@ public class Registro extends conexion {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ayuda))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -161,13 +177,15 @@ public class Registro extends conexion {
                             .addComponent(txtnifr, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                             .addComponent(txtcontraseñar, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ayuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtclienter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,10 +275,8 @@ public class Registro extends conexion {
 
                         Date fecha = jDateChooser1.getDate();
                         encriptar enp = new encriptar();
-            
-                        String encriptado = enp.encriptar(txtcontraseñar.getText(), enp.getClaveEncriptacion());
 
-            
+                        String encriptado = enp.encriptar(txtcontraseñar.getText(), enp.getClaveEncriptacion());
 
                         String consulta = "insert into clientes (apellidos, contraseña, NIF, email, telefono, nombre, fecha_nacimiento)"
                                 + "values ('" + txtapellidos.getText() + "', '" + encriptado + "', '" + txtnifr.getText()
@@ -333,11 +349,33 @@ public class Registro extends conexion {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaActionPerformed
+        File fichero = new File("./help/help_set.hs");
+        URL hsURL;
+        HelpSet helpset;
+        try {
+            hsURL = fichero.toURI().toURL();
+            try {
+                // Crea el HelpSet y el HelpBroker
+                helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+                HelpBroker hb = helpset.createHelpBroker();
+                // Pone ayuda al botón y a F1 en la ventana.
+                hb.enableHelpOnButton(ayuda, "aplicacion", helpset);
+                hb.enableHelpKey(this.getContentPane(), "aplicacion", helpset);
+            } catch (HelpSetException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_ayudaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ayuda;
     private javax.swing.JButton botonregistror;
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;

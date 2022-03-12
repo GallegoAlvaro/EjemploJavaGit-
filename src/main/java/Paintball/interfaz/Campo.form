@@ -327,6 +327,9 @@
           <Format format="#0" subtype="-1" type="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtdiasMouseExited"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

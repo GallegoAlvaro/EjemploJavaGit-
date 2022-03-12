@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -235,6 +236,11 @@ public class Campo extends javax.swing.JFrame {
         });
 
         txtdias.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtdias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtdiasMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -326,33 +332,52 @@ public class Campo extends javax.swing.JFrame {
 
     private void botonreservacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonreservacActionPerformed
 
-        jDialogequipamiento.setVisible(true);
-        jDialogequipamiento.setLocationRelativeTo(this);
-
+        int cantidadjugadores = Integer.valueOf(txtcantidadjugadoresc.getText());
+        int limitejugadores = Integer.valueOf(txtlimitejugadores.getText());
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
-                fechainicio = inicio.getDate();
+                if (!(txtdias.getText().isEmpty() || txtcantidadjugadoresc.getText().isEmpty())) {
+                    //este if
 
-                float hora = Float.parseFloat(txtpreciohorac.getText());
-                float total = Float.parseFloat(txttotalc.getText());
-                int idcli = gestionclientes.getIdCliente();
+                    if (cantidadjugadores <= limitejugadores) {
 
-                String consulta = "insert into campo (fecha_inicio, cantidad_dias, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal, clienteid)"
-                        + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', " + Integer.parseInt(txtdias.getText()) + ", '" + String.valueOf( Combotipocampo.getSelectedItem()) + "', "
-                        + Integer.parseInt(txtcantidadjugadoresc.getText()) + ", " + Integer.parseInt( txtlimitejugadores.getText()) + ", " + hora
-                        + ", " + total + ", " + idcli + ")";
+                        Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
-                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                        fechainicio = inicio.getDate();
 
-                sentencia.executeUpdate();
+                        float hora = Float.parseFloat(txtpreciohorac.getText());
+                        float total = Float.parseFloat(txttotalc.getText());
+                        int idcli = gestionclientes.getIdCliente();
+
+                        String consulta = "insert into campo (fecha_inicio, cantidad_dias, tipo, cantidadjugadores, limitejugadores, preciohora, preciototal, clienteid)"
+                                + "values ('" + new SimpleDateFormat("YYYY-MM-dd").format(fechainicio) + "', " + Integer.parseInt(txtdias.getText()) + ", '" + String.valueOf(Combotipocampo.getSelectedItem()) + "', "
+                                + Integer.parseInt(txtcantidadjugadoresc.getText()) + ", " + Integer.parseInt(txtlimitejugadores.getText()) + ", " + hora
+                                + ", " + total + ", " + idcli + ")";
+
+                        PreparedStatement sentencia = conexion.prepareStatement(consulta);
+
+                        jDialogequipamiento.setVisible(true);
+                        jDialogequipamiento.setLocationRelativeTo(this);
+
+                        sentencia.executeUpdate();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "¡Hay demasiados jugadores para jugar en este campo!");
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(rootPane, "Debes de indicar \nLos dias que desea reservar \nCuantos jugadores participaran");
+
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -423,7 +448,7 @@ public class Campo extends javax.swing.JFrame {
             if (!inicio.equals("") && !txtdias.equals("")) {
 
                 int dias = Integer.parseInt(txtdias.getText());
-                System.out.println(dias);
+              
 
                 float preciototal = dias * preci;
 
@@ -437,6 +462,27 @@ public class Campo extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_itemlistenar
+
+    private void txtdiasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtdiasMouseExited
+        
+            try {
+                if (!inicio.equals("") && !txtdias.equals("")) {
+
+                    int dias = Integer.parseInt(txtdias.getText());
+                   
+
+                    float preciototal = dias * preci;
+
+                    txttotalc.setText(String.valueOf(preciototal));
+                }
+            } catch (NumberFormatException ex) {
+
+                System.out.println(ex);
+
+            }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdiasMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

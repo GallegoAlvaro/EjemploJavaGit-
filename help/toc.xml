@@ -1,0 +1,10 @@
+<toc version="1.0">
+ <tocitem text="Tarea JavaHelp" target="aplicacion">
+ <tocitem text="Login" target="Login"/>
+ <tocitem text="Registrarse" target="Registrarse"/>
+ <tocitem text="Facturacion" target="Facturacion"/>
+ <tocitem text="Reservacampo" target="Reservacampo"/>
+ <tocitem text="Reservaequipo" target="Reservaequipo"/>
+ <tocitem text="Administrador" target="Administrador"/>
+ </tocitem>
+</toc>

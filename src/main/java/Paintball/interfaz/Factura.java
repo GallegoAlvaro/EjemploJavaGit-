@@ -11,8 +11,18 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -197,6 +207,33 @@ public class Factura extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+         String reportResource = "./src/main/java/informes/factura1.jrxml";
+        String reportCompilado = "./src/main/java/informes/factura1.jasper";
+        String reportPDF = "./src/main/java/informes/factura1.pdf";
+        JasperReport reporte;
+        boolean compilado = true;
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("titulo", "listado");
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
+            if (compilado) {
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(reportCompilado);
+            } else {
+                reporte = JasperCompileManager.compileReport(reportResource);
+            }
+            JasperPrint informe = JasperFillManager.fillReport(reporte, params, conexion);
+            JasperViewer.viewReport(informe);
+            JasperExportManager.exportReportToPdfFile(informe, reportPDF);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
         // TODO add your handling code here:
     }//GEN-LAST:event_botonsacarfacturaActionPerformed

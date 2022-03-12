@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -225,6 +226,12 @@ public class Equipamiento extends javax.swing.JFrame {
             }
         });
 
+        txtarmas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtarmasActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Cantidad de TRAJES AZULES:");
 
         txttrajesazules.addActionListener(new java.awt.event.ActionListener() {
@@ -372,15 +379,12 @@ public class Equipamiento extends javax.swing.JFrame {
 
     private void botonreservaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonreservaeActionPerformed
 
-        jDialog1.setVisible(true);
-        jDialog1.setLocationRelativeTo(this);
-
-        totalarmas = Float.parseFloat(txtarmas.getText()) * Float.parseFloat(txtprecioarma.getText());
+       totalarmas = Float.parseFloat(txtarmas.getText()) * Float.parseFloat(txtprecioarma.getText());
         totalmunicion = Integer.parseInt(txtmunicion.getText()) * Float.parseFloat(txtpreciomunicion.getText());
-        totaltrojos =  Integer.parseInt(txttrajesrojos.getText()) * Float.parseFloat(txtpreciotrajes.getText());
-        totalazules = Integer.parseInt(txttrajesazules.getText())* Float.parseFloat(txtpreciotrajes.getText());
+        totaltrojos = Integer.parseInt(txttrajesrojos.getText()) * Float.parseFloat(txtpreciotrajes.getText());
+        totalazules = Integer.parseInt(txttrajesazules.getText()) * Float.parseFloat(txtpreciotrajes.getText());
         totaltrajes = totaltrojos + totalazules;
-        
+
         total = totalarmas + totalmunicion + totaltrajes;
 
         total2 = String.valueOf(total);
@@ -389,28 +393,38 @@ public class Equipamiento extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
-                
-                
-                int idcli = gestionclientes.getIdCliente();
-                
-                String sql = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, "
-                        + "traje_azul, traje_rojo, precio_trajes, clienteid) values (?,?,?,?,?,?,?,?,?)";
-                
-                PreparedStatement sentencia = conexion.prepareStatement(sql);
-                sentencia.setFloat(1, total);
-                sentencia.setInt(2, Integer.parseInt(txtarmas.getText()));
-                sentencia.setFloat(3, totalarmas);
-                sentencia.setInt(4, Integer.parseInt(txtmunicion.getText()));
-                sentencia.setFloat(5, totalmunicion);
-                sentencia.setInt(6, Integer.parseInt(txttrajesazules.getText()));
-                sentencia.setInt(7, Integer.parseInt(txttrajesrojos.getText()));
-                sentencia.setFloat(8, totaltrajes);
-                sentencia.setInt(9, idcli);
-                
+                if (!(txtarmas.getText().isEmpty() || txtmunicion.getText().isEmpty() || txttrajesrojos.getText().isEmpty() || txttrajesazules.getText().isEmpty())) {
+                    
+                    Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://149.62.172.43/grupo2", "grupo2", "%Gyrl872");
 
-                sentencia.executeUpdate();
+                    int idcli = gestionclientes.getIdCliente();
+
+                    String sql = "insert into equipamiento (precio_equipamiento_total, arma, precio_arma, municio, precio_municion, "
+                            + "traje_azul, traje_rojo, precio_trajes, clienteid) values (?,?,?,?,?,?,?,?,?)";
+
+                    PreparedStatement sentencia = conexion.prepareStatement(sql);
+                    sentencia.setFloat(1, total);
+                    sentencia.setInt(2, Integer.parseInt(txtarmas.getText()));
+                    sentencia.setFloat(3, totalarmas);
+                    sentencia.setInt(4, Integer.parseInt(txtmunicion.getText()));
+                    sentencia.setFloat(5, totalmunicion);
+                    sentencia.setInt(6, Integer.parseInt(txttrajesazules.getText()));
+                    sentencia.setInt(7, Integer.parseInt(txttrajesrojos.getText()));
+                    sentencia.setFloat(8, totaltrajes);
+                    sentencia.setInt(9, idcli);
+
+                    sentencia.executeUpdate();
+
+                    jDialog1.setVisible(true);
+                    jDialog1.setLocationRelativeTo(this);
+                    this.setVisible(false);
+
+                } else {
+
+                    JOptionPane.showMessageDialog(rootPane, "Debes de indicar \nLa cantidad de municiÃ³n \nLa cantidad de trajes rojos \nLa cantidad de trajes azules \nLa cantidad de armas");
+
+                }
                 // TODO add your handling code here:
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
@@ -494,6 +508,10 @@ public class Equipamiento extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtarmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtarmasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtarmasActionPerformed
 
     /**
      * @param args the command line arguments
